@@ -16,7 +16,23 @@ https://dl.acm.org/doi/10.1145/3423211.3425677
 * Check if `/usr/src/linux-headers-$(uname -r)/include/uapi/linux/bpf_perf_event.h` is available on the host.
 * Adapt user: `sudo adduser XXX docker`. Log out, log in.
 * *Install the monitoring SGX driver*:
+  * Uninstall
+  ```
+  sudo systemctl stop aesmd
+  sudo /sbin/modprobe -r isgx
+  sudo rm -rf "/lib/modules/"`uname -r`"/kernel/drivers/intel/sgx"
+  sudo /sbin/depmod
+  sudo /bin/sed -i '/^isgx$/d' /etc/modules
+  ```
   * `curl -fsSL https://raw.githubusercontent.com/scontain/SH/master/install_sgx_driver.sh | bash -s - install --force -p metrics `
+  * restart aesmd
+  ```
+  sudo systemctl start aesmd
+  ```
+  * check
+  ```
+  lsmod | grep -r sgx
+  ```
 * Run: `./start.sh`
 * Check running containers: `docker ps` should contain "prometheus, grafana, sgx-exporter, node-exporter, ebpf-exporter, cadvisor"
 * Open: `http://localhost:9091`
