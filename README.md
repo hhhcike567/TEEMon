@@ -32,7 +32,7 @@ https://dl.acm.org/doi/10.1145/3423211.3425677
   * check
   ```
   lsmod | grep sgx
-  sudo service aesmd restart
+  service aesmd status
   ```
 * Run: `./start.sh`
 * Check running containers: `docker ps` should contain "prometheus, grafana, sgx-exporter, node-exporter, ebpf-exporter, cadvisor"
