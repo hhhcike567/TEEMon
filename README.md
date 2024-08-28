@@ -9,6 +9,10 @@ https://dl.acm.org/doi/10.1145/3423211.3425677
 
 * TeeMon requires the linux kernel to be of version 4.15.0-99 or newer. 
 * Install dependencies: `docker-compose, docker.io, and linux-headers`
+  ```
+  sudo apt update
+  sudo apt install -y docker.io docker-compose linux-headers-$(uname -r)
+  ```
 * Check if `/usr/src/linux-headers-$(uname -r)/include/uapi/linux/bpf_perf_event.h` is available on the host.
 * Adapt user: `sudo adduser XXX docker`. Log out, log in.
 * *Install the monitoring SGX driver*:
